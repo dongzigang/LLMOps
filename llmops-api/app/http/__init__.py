@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 """ 
-@Tíme:   2025/11/16 - 17:10
+@Tíme:   2025/11/16 - 21:07
 @Author: 199312306017deg@gmail.com
 @File:   __init__.py
-路由
 """
-from .router import Router
-
-__all__ = ['Router']

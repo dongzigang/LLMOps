@@ -6,3 +6,6 @@
 @File:   __init__.py
 服务
 """
+from .http import Http
+
+__all__ = ['Http']
