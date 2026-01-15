@@ -13,6 +13,7 @@ from injector import inject
 from internal.handler import AppHandler
 
 
+# inject 依赖注入   dataclass 自动生成构造函数
 @inject
 @dataclass
 class Router:
@@ -25,7 +26,6 @@ class Router:
         bp = Blueprint("llmops", __name__, url_prefix="")
 
         # 2.将url与对应的控制器做绑定
-        app_handler = AppHandler()
         bp.add_url_rule("/ping", view_func=self.app_handler.ping, methods=["GET"])
         bp.add_url_rule("/app/completion", view_func=self.app_handler.completion, methods=["POST"])
 
