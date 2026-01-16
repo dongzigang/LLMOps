@@ -6,3 +6,21 @@
 @File:   __init__.py
 公用异常信息
 """
+
+from .exception import (
+    CustomException,
+    FailException,
+    NotFoundException,
+    UnauthorizedException,
+    ForbiddenException,
+    ValidateErrorException
+)
+
+__all__ = [
+    "CustomException",
+    "FailException",
+    "UnauthorizedException",
+    "ForbiddenException",
+    "ValidateErrorException",
+    "NotFoundException",
+]

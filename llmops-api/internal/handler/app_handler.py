@@ -7,23 +7,25 @@
 """
 import os
 
-from flask import request, jsonify
+from flask import request
 from openai import OpenAI
 
+from internal.exception import NotFoundException
 from internal.schema.app_schema import CompletionReq
-from pkg.response import Response, HttpCode
+from pkg.response import success_json, validate_error_json
 
 
 class AppHandler:
     """" 应用控制器 """
 
     def ping(self):
-        return {"ping": "pong"}
+        raise NotFoundException('no data')
+        # return {"ping": "pong"}
 
     def completion(self):
         req = CompletionReq()
         if not req.validate():
-            return req.errors
+            return validate_error_json(req.errors)
 
         query = request.json.get("query")
         client = OpenAI(api_key=os.getenv("DASHSCOPE_API_KEY"), base_url=os.getenv("DASHSCOPE_API_BASE"))
@@ -36,6 +38,4 @@ class AppHandler:
         )
         content = completion.choices[0].message.content
 
-        resp = Response(code=HttpCode.SUCCESS, message="", data={"content": content})
-
-        return jsonify(resp), 200
+        return success_json(data={"content": content})
