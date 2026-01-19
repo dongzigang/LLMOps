@@ -6,7 +6,7 @@
 @File:   app_handler
 """
 import os
-
+import uuid
 from flask import request
 from openai import OpenAI
 
@@ -24,7 +24,19 @@ class AppHandler:
     app_service:AppService
     def create_app(self):
         app = self.app_service.create_app()
-        return success_message(f"应用创建成功，id{app.id}")
+        return success_message(f"应用创建成功，id={app.id}")
+
+    def get_app(self, id:uuid.UUID):
+        app = self.app_service.get_app(id)
+        return success_message(f"应用成功获取，name={app.name}")
+
+    def update_app(self, id:uuid.UUID):
+        app = self.app_service.update_app(id)
+        return success_message(f"应用成功修改，name={app.name}")
+
+    def delete_app(self, id:uuid.UUID):
+        app = self.app_service.delete_app(id)
+        return success_message(f"应用成功删除，name={app.name}")
 
 
     def ping(self):
