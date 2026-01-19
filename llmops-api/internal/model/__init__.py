@@ -6,3 +6,7 @@
 @File:   __init__.py
 存储与数据库关联的类名
 """
+
+from .app import App
+
+__all__ = ["App"]
