@@ -8,13 +8,14 @@
 import os
 
 from flask import Flask
-from pkg.sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+
 from config import Config
 from internal.exception import CustomException
+from internal.model import App
 from internal.router import Router
 from pkg.response import Response, json, HttpCode
-from  internal.model import App
+from pkg.sqlalchemy import SQLAlchemy
 
 
 class Http(Flask):
@@ -25,7 +26,7 @@ class Http(Flask):
             *args,
             conf: Config,
             db: SQLAlchemy,
-            migrate:Migrate,
+            migrate: Migrate,
             router: Router,
             **kwargs
     ):
@@ -42,7 +43,7 @@ class Http(Flask):
         db.init_app(self)
         with self.app_context():
             _ = App()
-            db.create_all()
+            # db.create_all()
             migrate.init_app(self, db, directory="internal/migration")
 
         # 注册应用路由
